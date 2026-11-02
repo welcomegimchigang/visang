@@ -13,18 +13,15 @@ interface IntroSequenceProps {
 }
 
 const MAP_SOURCES = [
-  "/naver_map (1).png",
-  "/images/naver_map (1).png",
-  "/images/campus-map.png",
+  "/campus-map.png",
+  "/naver_map%20(1).png",
+  "/images/naver_map%20(1).png",
 ];
 
 export default function IntroSequence({ onComplete }: IntroSequenceProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [mapSrcIndex, setMapSrcIndex] = useState(0);
-  const [mapImageLoaded, setMapImageLoaded] = useState(false);
-  const [mapImageError, setMapImageError] = useState(false);
-  const [logoImageLoaded, setLogoImageLoaded] = useState(false);
-  const [logoImageError, setLogoImageError] = useState(false);
+  const [logoImageError, setLogoImageError] = useState(true);
 
   const handleFinish = useCallback(() => {
     setIsVisible(false);
@@ -44,8 +41,6 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
   const handleMapError = () => {
     if (mapSrcIndex < MAP_SOURCES.length - 1) {
       setMapSrcIndex((prev) => prev + 1);
-    } else {
-      setMapImageError(true);
     }
   };
 
@@ -67,21 +62,15 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
         >
           {/* STEP 1: Campus Map & Sequential Nodes/Lines (0.0s ~ 2.6s) */}
           <div className="relative w-full h-full overflow-hidden">
-            {/* Ambient Full-Screen Backdrop for Portrait Mobile Viewports */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#071714] via-[#0D2622] to-[#071714]" />
-            {!mapImageError && (
-              <img
-                src={MAP_SOURCES[mapSrcIndex]}
-                alt=""
-                aria-hidden="true"
-                className={`absolute inset-0 w-full h-full object-cover scale-125 blur-xl opacity-35 pointer-events-none transition-opacity duration-300 ${
-                  mapImageLoaded ? "opacity-35" : "opacity-0"
-                }`}
-              />
-            )}
+            {/* Ambient Full-Screen Blurred Satellite Backdrop for Portrait Mobile Viewports */}
+            <div
+              className="absolute inset-0 bg-cover bg-center scale-125 blur-xl opacity-55 pointer-events-none"
+              style={{ backgroundImage: "url('/campus-map.png')" }}
+            />
+            <div className="absolute inset-0 bg-[#0D2622]/40 pointer-events-none" />
 
             {/* Top-left subtle HUD indicator */}
-            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-10 z-30 flex items-center gap-2 text-[11px] sm:text-xs md:text-sm font-medium tracking-wider text-[#8CE0CF]/90 pr-4">
+            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-10 z-30 flex items-center gap-2 text-[11px] sm:text-xs md:text-sm font-medium tracking-wider text-[#8CE0CF] drop-shadow pr-4">
               <span className="inline-block w-2 h-2 shrink-0 rounded-full bg-[#68C3B1] animate-pulse shadow-[0_0_8px_#68C3B1]" />
               <span className="truncate">
                 INCHEON NATIONAL UNIVERSITY · SONGDO CAMPUS
@@ -90,12 +79,13 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
 
             {/*
               Unified Coordinate Wrapper:
-              - Preserves exact 1901/931 aspect ratio of naver_map (1).png so percentage coordinates never drift.
+              - Preserves exact 1901/931 aspect ratio of campus-map.png so percentage coordinates never drift.
               - On Mobile (<640px): w-[320vw] centered on (57.8%, 29.5%) so 14호관(48.8%), 13호관(54.8%), 5호관(66.8%)
                 sit right in the center of portrait screens (360px~430px) with ~21vw safe margin on both sides.
               - On Tablet/Desktop (>=640px): fills viewport with scale-[1.35] origin-[58%_28%].
             */}
             <div
+              style={{ backgroundImage: "url('/campus-map.png')" }}
               className="
                 absolute left-1/2 top-1/2
                 aspect-[1901/931]
@@ -103,96 +93,59 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                 sm:w-auto sm:min-w-[100vw] sm:min-h-[100dvh]
                 sm:-translate-x-1/2 sm:-translate-y-1/2
                 sm:scale-[1.35] sm:origin-[58%_28%]
+                bg-no-repeat bg-[length:100%_100%] bg-center
                 shrink-0
               "
             >
-              {/* Architectural/Satellite Campus SVG Fallback Base Layer (1901x931) */}
+              {/* Real Satellite Campus Map Image (Always opacity-100 from SSR mount) */}
+              <img
+                src={MAP_SOURCES[mapSrcIndex]}
+                alt="인천대학교 송도캠퍼스 위성 지도"
+                onError={handleMapError}
+                className="absolute inset-0 z-0 w-full h-full object-fill opacity-100"
+              />
+
+              {/* Subtle Dark Overlay so Satellite Photo is Vivid & Nodes/Lines Pop Clearly */}
+              <div className="absolute inset-0 z-[1] bg-slate-950/35 pointer-events-none" />
+
+              {/* Subtle Target Rings Around the 3 Buildings */}
               <svg
-                className="absolute inset-0 w-full h-full"
+                className="absolute inset-0 z-[2] w-full h-full pointer-events-none"
                 viewBox="0 0 1901 931"
                 preserveAspectRatio="none"
                 aria-hidden="true"
               >
-                <defs>
-                  <radialGradient
-                    id="campusCeladonGlow"
-                    cx="55%"
-                    cy="30%"
-                    r="65%"
-                  >
-                    <stop offset="0%" stopColor="#143630" stopOpacity="0.95" />
-                    <stop offset="60%" stopColor="#0D2622" stopOpacity="0.98" />
-                    <stop offset="100%" stopColor="#071714" stopOpacity="1" />
-                  </radialGradient>
-                  <pattern
-                    id="celadonGrid"
-                    width="60"
-                    height="60"
-                    patternUnits="userSpaceOnUse"
-                  >
-                    <path
-                      d="M 60 0 L 0 0 0 60"
-                      fill="none"
-                      stroke="#2E7D6F"
-                      strokeWidth="0.6"
-                      strokeOpacity="0.25"
-                    />
-                  </pattern>
-                </defs>
-                <rect
-                  width="1901"
-                  height="931"
-                  fill="url(#campusCeladonGlow)"
-                />
-                <rect width="1901" height="931" fill="url(#celadonGrid)" />
                 <circle
                   cx={1901 * 0.668}
                   cy={931 * 0.385}
-                  r="70"
+                  r="60"
                   fill="none"
                   stroke="#68C3B1"
-                  strokeWidth="1"
-                  strokeOpacity="0.3"
+                  strokeWidth="1.2"
+                  strokeOpacity="0.45"
                   strokeDasharray="4 4"
                 />
                 <circle
                   cx={1901 * 0.548}
                   cy={931 * 0.262}
-                  r="70"
+                  r="60"
                   fill="none"
                   stroke="#68C3B1"
-                  strokeWidth="1"
-                  strokeOpacity="0.3"
+                  strokeWidth="1.2"
+                  strokeOpacity="0.45"
                   strokeDasharray="4 4"
                 />
                 <circle
                   cx={1901 * 0.488}
                   cy={931 * 0.202}
-                  r="90"
+                  r="80"
                   fill="none"
                   stroke="#8CE0CF"
-                  strokeWidth="1.2"
-                  strokeOpacity="0.4"
+                  strokeWidth="1.5"
+                  strokeOpacity="0.55"
                   strokeDasharray="5 5"
                 />
               </svg>
-
-              {/* Real Naver Campus Map Image (/naver_map (1).png) */}
-              {!mapImageError && (
-                <img
-                  src={MAP_SOURCES[mapSrcIndex]}
-                  alt="인천대학교 송도캠퍼스 지도"
-                  onLoad={() => setMapImageLoaded(true)}
-                  onError={handleMapError}
-                  className={`absolute inset-0 w-full h-full object-fill transition-opacity duration-300 ${
-                    mapImageLoaded ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-              )}
-
-              {/* Dark Celadon Overlay for High Contrast of Glowing Nodes & Lines */}
-              <div className="absolute inset-0 bg-[#0D2622]/45 mix-blend-multiply" />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#0D2622]/50 via-[#143630]/20 to-[#0D2622]/65" />
 
               {/* SVG Connecting Lines Layer (Locked to 1901/931 Wrapper) */}
               <svg
@@ -240,7 +193,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                         vectorEffect="non-scaling-stroke"
                         style={{ filter: "url(#celadonLineGlow)" }}
                         initial={{ pathLength: 0, opacity: 0 }}
-                        animate={{ pathLength: 1, opacity: 0.85 }}
+                        animate={{ pathLength: 1, opacity: 0.9 }}
                         transition={{
                           pathLength: {
                             delay: line.startAt,
@@ -314,10 +267,10 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                           <div className="sm:hidden w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[5px] border-b-[#0D2622]/95" />
                         )}
 
-                        <div className="bg-[#0D2622]/95 border border-[#68C3B1]/65 text-white px-2 py-0.5 sm:px-2.5 sm:py-1 rounded shadow-lg text-[11px] sm:text-xs font-bold tracking-tight flex flex-col sm:flex-row items-center gap-0 sm:gap-1.5 backdrop-blur-sm leading-tight">
+                        <div className="bg-[#0D2622]/95 border border-[#68C3B1]/75 text-white px-2 py-0.5 sm:px-2.5 sm:py-1 rounded shadow-xl text-[11px] sm:text-xs font-bold tracking-tight flex flex-col sm:flex-row items-center gap-0 sm:gap-1.5 backdrop-blur-md leading-tight">
                           <span className="text-[#8CE0CF]">{node.label}</span>
                           {node.subLabel && (
-                            <span className="text-zinc-200 font-medium text-[9px] sm:text-[11px]">
+                            <span className="text-zinc-100 font-medium text-[9px] sm:text-[11px]">
                               <span className="hidden sm:inline">· </span>
                               {node.subLabel}
                             </span>
@@ -335,7 +288,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                       </div>
 
                       {/* Outer Celadon Pulse Ring */}
-                      <span className="absolute -inset-2 sm:-inset-2.5 rounded-full bg-[#68C3B1]/45 animate-ping" />
+                      <span className="absolute -inset-2 sm:-inset-2.5 rounded-full bg-[#68C3B1]/55 animate-ping" />
 
                       {/* Glowing Celadon + White Core Dot */}
                       <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-white border-2 border-[#68C3B1] shadow-[0_0_16px_4px_rgba(104,195,177,0.95)]" />
@@ -365,7 +318,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 3.35, duration: 0.15 }}
-            className="absolute inset-0 z-40 bg-white flex flex-col items-center justify-center px-4 sm:px-6 text-center"
+            className="absolute inset-0 z-40 bg-white flex flex-col items-center justify-center px-4 sm:px-6 text-center pointer-events-none"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 8 }}
@@ -386,20 +339,15 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                 <span className="h-[2px] w-6 sm:w-8 md:w-12 bg-gradient-to-l from-transparent to-[#2E7D6F]" />
               </div>
 
-              {/* Optional Logo Image with Clean Typography Fallback */}
-              {!logoImageError && (
+              {/* Clean Typography Logo (with optional /images/logo-bisang.png support) */}
+              {!logoImageError ? (
                 <img
                   src="/images/logo-bisang.png"
                   alt={ELECTION_INFO.teamFullTitle}
-                  onLoad={() => setLogoImageLoaded(true)}
                   onError={() => setLogoImageError(true)}
-                  className={`h-20 sm:h-24 md:h-32 w-auto object-contain mb-2 ${
-                    logoImageLoaded ? "block" : "hidden"
-                  }`}
+                  className="h-20 sm:h-24 md:h-32 w-auto object-contain mb-2 block"
                 />
-              )}
-
-              {(!logoImageLoaded || logoImageError) && (
+              ) : (
                 <div className="relative flex items-center justify-center">
                   <h1 className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tight text-black">
                     {ELECTION_INFO.teamHanja}
