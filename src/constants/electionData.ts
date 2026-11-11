@@ -37,15 +37,6 @@ export interface PledgeCategory {
   pledges: string[];
 }
 
-export interface SnsCard {
-  id: string;
-  title: string;
-  description: string;
-  actionText: string;
-  url: string;
-  toastMessage: string;
-}
-
 export interface ElectionInfo {
   badge: string;
   collegeBadge: string;
@@ -75,7 +66,6 @@ export const ELECTION_INFO: ElectionInfo = {
 export const NAV_ITEMS: NavItem[] = [
   { label: "후보자", href: "#candidates" },
   { label: "공약", href: "#pledges" },
-  { label: "SNS", href: "#sns" },
 ];
 
 export const INTRO_NODES: IntroNode[] = [
@@ -215,42 +205,3 @@ export const PLEDGE_CATEGORIES: PledgeCategory[] = [
     ],
   },
 ];
-
-export const FLOATING_PDF = {
-  pdfUrl: "",
-  posterPdfUrl: "/poster-2027.pdf",
-  toastMessage: "공약안내서 PDF 준비 중입니다.",
-};
-
-export const SNS_CARDS: SnsCard[] = [
-  {
-    id: "instagram",
-    title: "글로벌정경대학 선거운동본부 비상 (飛上)",
-    description: "공식 인스타그램 채널",
-    actionText: "바로가기 >>>",
-    url: "",
-    toastMessage: "현재 오픈 준비 중입니다.",
-  },
-  {
-    id: "pledge-pdf",
-    title: "공약안내서",
-    description: "요약은 홈페이지에서, 자세한 건 공약안내서에서 확인하세요",
-    actionText: "바로가기 >>>",
-    url: "",
-    toastMessage: "현재 오픈 준비 중입니다.",
-  },
-  {
-    id: "anonymous",
-    title: "익명 소통창구",
-    description: "학우 여러분의 소중한 의견을 들려주세요. 모든 의견은 익명입니다",
-    actionText: "바로가기 >>>",
-    url: "",
-    toastMessage: "현재 오픈 준비 중입니다.",
-  },
-];
-
-export const SNS_LINKS = {
-  pdfUrl: "",
-  posterPdfUrl: "/poster-2027.pdf",
-  cards: SNS_CARDS,
-};

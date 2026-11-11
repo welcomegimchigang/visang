@@ -7,22 +7,12 @@ import CandidatesSection from "@/components/CandidatesSection";
 import SloganBanner from "@/components/SloganBanner";
 import PledgesSection from "@/components/PledgesSection";
 import SnsSection from "@/components/SnsSection";
-import Toast from "@/components/Toast";
 
 export default function HomePage() {
   const [introDone, setIntroDone] = useState(false);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const handleIntroComplete = useCallback(() => {
     setIntroDone(true);
-  }, []);
-
-  const handleTriggerToast = useCallback((message: string) => {
-    setToastMessage(message);
-  }, []);
-
-  const handleCloseToast = useCallback(() => {
-    setToastMessage(null);
   }, []);
 
   return (
@@ -35,10 +25,9 @@ export default function HomePage() {
         <CandidatesSection />
         <SloganBanner />
         <PledgesSection />
-        <SnsSection onTriggerToast={handleTriggerToast} />
       </main>
 
-      <Toast message={toastMessage} onClose={handleCloseToast} />
+      <SnsSection />
     </div>
   );
 }

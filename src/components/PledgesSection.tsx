@@ -140,7 +140,10 @@ export function PledgesSection() {
             </div>
 
             {/* Right (5 cols): Official A2 Election Poster Preview + Category Summary */}
-            <div className="lg:col-span-5 w-full lg:sticky lg:top-24">
+            <div
+              id="poster"
+              className="lg:col-span-5 w-full lg:sticky lg:top-24 scroll-mt-20"
+            >
               <div className="rounded-2xl overflow-hidden border border-[#357F72]/35 bg-gradient-to-b from-[#0D2622] via-[#163B34] to-[#357F72] text-white shadow-lg">
                 {/* Official Poster Image Preview (Immediately visible with opacity-100!) */}
                 {!posterError && (
@@ -180,7 +183,7 @@ export function PledgesSection() {
                         className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#357F72] hover:bg-[#2E7568] text-white font-bold transition-colors"
                       >
                         <FileText className="w-3.5 h-3.5 text-[#99DED0]" />
-                        <span>원본 PDF 열기</span>
+                        <span>포스터 원본 PDF</span>
                       </a>
                     </div>
                   </div>
@@ -307,7 +310,7 @@ export function PledgesSection() {
                     className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#357F72] hover:bg-[#2E7568] text-xs font-bold text-white transition-colors"
                   >
                     <FileText className="w-3.5 h-3.5 text-[#99DED0]" />
-                    <span>PDF 보기</span>
+                    <span>포스터 원본 PDF</span>
                   </a>
                   <button
                     type="button"

@@ -20,6 +20,13 @@ export function Navbar() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const visibleNavItems = NAV_ITEMS.filter(
+    (item) =>
+      item.href !== "#sns" &&
+      !item.label.toUpperCase().includes("SNS") &&
+      !item.label.includes("공약안내서")
+  );
+
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-[#0D2622]/90 border-b border-[#76C7B7]/15 text-white transition-colors">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 md:h-20 flex items-center justify-between gap-2">
@@ -46,14 +53,14 @@ export function Navbar() {
         {/* Right: Single-Tap Thumb-Friendly Pill Links on Mobile & Clean Links on Desktop */}
         <nav
           aria-label="주요 메뉴"
-          className="flex items-center gap-1 sm:gap-3 md:gap-7 shrink-0"
+          className="flex items-center gap-1.5 sm:gap-3 md:gap-7 shrink-0"
         >
-          {NAV_ITEMS.map((item) => (
+          {visibleNavItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
-              className="relative px-2.5 py-1.5 sm:px-3.5 sm:py-2 md:px-1 md:py-2 rounded-full md:rounded-none text-xs sm:text-sm lg:text-base font-semibold text-white/95 bg-[#163B34]/80 sm:bg-[#163B34]/60 md:bg-transparent border border-[#76C7B7]/25 md:border-0 hover:text-[#99DED0] active:bg-[#357F72] transition-all group"
+              className="relative px-3 py-1.5 sm:px-3.5 sm:py-2 md:px-1 md:py-2 rounded-full md:rounded-none text-xs sm:text-sm lg:text-base font-semibold text-white/95 bg-[#163B34]/80 sm:bg-[#163B34]/60 md:bg-transparent border border-[#76C7B7]/25 md:border-0 hover:text-[#99DED0] active:bg-[#357F72] transition-all group"
             >
               {item.label}
               <span className="hidden md:block absolute bottom-0 left-0 w-0 h-0.5 bg-[#76C7B7] rounded-full transition-all duration-300 group-hover:w-full" />
