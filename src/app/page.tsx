@@ -16,7 +16,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#0D2622] text-white">
+    <div className="relative min-h-screen bg-[#F2F9FA] text-[#111827]">
       {!introDone && <IntroSequence onComplete={handleIntroComplete} />}
 
       <Navbar />

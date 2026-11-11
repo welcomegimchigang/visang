@@ -10,12 +10,13 @@ const config: Config = {
     extend: {
       colors: {
         bisang: {
-          primary: "#357F72",
-          dark: "#0D2622",
-          navy: "#163B34",
-          light: "#EDF5F2",
-          sky: "#99DED0",
-          cyan: "#76C7B7",
+          primary: "#68C0C7",
+          poster: "#8FD0D4",
+          deep: "#3B9AA3",
+          dark: "#1E5B63",
+          light: "#F2F9FA",
+          sky: "#BCE6E9",
+          cyan: "#8FD0D4",
         },
       },
       fontFamily: {

@@ -5,8 +5,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #0D2622;
-    color: #FFFFFF;
+    background-color: #F2F9FA;
+    color: #111827;
     -webkit-tap-highlight-color: transparent;
     text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -22,23 +22,23 @@
   }
 }
 
-/* Custom scrollbar in Goryeo Celadon (고려청자 비색) & Deep Jade */
+/* Custom scrollbar matching Poster Sky Blue (#8FD0D4 / #58B4BC) */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0D2622;
+  background: #F2F9FA;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #357F72;
+  background: #8FD0D4;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #76C7B7;
+  background: #58B4BC;
 }
 
 /* Hide scrollbar for clean mobile horizontal scroll containers if any */

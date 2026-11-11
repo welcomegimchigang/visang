@@ -57,21 +57,21 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
             ease: "easeInOut",
           }}
           exit={{ opacity: 0, transition: { duration: 0.35 } }}
-          className="fixed inset-0 z-50 h-[100dvh] w-screen overflow-hidden bg-[#0D2622] select-none"
+          className="fixed inset-0 z-50 h-[100dvh] w-screen overflow-hidden bg-slate-900 select-none"
           aria-label="비상 인트로 시퀀스"
         >
           {/* STEP 1: Campus Map & Sequential Nodes/Lines (0.0s ~ 2.6s) */}
           <div className="relative w-full h-full overflow-hidden">
             {/* Ambient Full-Screen Blurred Satellite Backdrop for Portrait Mobile Viewports */}
             <div
-              className="absolute inset-0 bg-cover bg-center scale-125 blur-xl opacity-55 pointer-events-none"
+              className="absolute inset-0 bg-cover bg-center scale-125 blur-xl opacity-60 pointer-events-none"
               style={{ backgroundImage: "url('/campus-map.png')" }}
             />
-            <div className="absolute inset-0 bg-[#0D2622]/40 pointer-events-none" />
+            <div className="absolute inset-0 bg-slate-900/35 pointer-events-none" />
 
             {/* Top-left subtle HUD indicator */}
-            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-10 z-30 flex items-center gap-2 text-[11px] sm:text-xs md:text-sm font-medium tracking-wider text-[#8CE0CF] drop-shadow pr-4">
-              <span className="inline-block w-2 h-2 shrink-0 rounded-full bg-[#68C3B1] animate-pulse shadow-[0_0_8px_#68C3B1]" />
+            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-10 z-30 flex items-center gap-2 text-[11px] sm:text-xs md:text-sm font-medium tracking-wider text-[#8FD0D4] drop-shadow pr-4">
+              <span className="inline-block w-2 h-2 shrink-0 rounded-full bg-[#7DD3FC] animate-pulse shadow-[0_0_8px_#38BDF8]" />
               <span className="truncate">
                 INCHEON NATIONAL UNIVERSITY · SONGDO CAMPUS
               </span>
@@ -105,10 +105,10 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                 className="absolute inset-0 z-0 w-full h-full object-fill opacity-100"
               />
 
-              {/* Subtle Dark Overlay so Satellite Photo is Vivid & Nodes/Lines Pop Clearly */}
+              {/* Subtle Dark Overlay so Satellite Photo is Vivid & Sky-Blue Nodes/Lines Pop Clearly */}
               <div className="absolute inset-0 z-[1] bg-slate-950/35 pointer-events-none" />
 
-              {/* Subtle Target Rings Around the 3 Buildings */}
+              {/* Subtle Sky-Blue Target Rings Around the 3 Buildings */}
               <svg
                 className="absolute inset-0 z-[2] w-full h-full pointer-events-none"
                 viewBox="0 0 1901 931"
@@ -120,9 +120,9 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                   cy={931 * 0.385}
                   r="60"
                   fill="none"
-                  stroke="#68C3B1"
+                  stroke="#8FD0D4"
                   strokeWidth="1.2"
-                  strokeOpacity="0.45"
+                  strokeOpacity="0.5"
                   strokeDasharray="4 4"
                 />
                 <circle
@@ -130,9 +130,9 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                   cy={931 * 0.262}
                   r="60"
                   fill="none"
-                  stroke="#68C3B1"
+                  stroke="#8FD0D4"
                   strokeWidth="1.2"
-                  strokeOpacity="0.45"
+                  strokeOpacity="0.5"
                   strokeDasharray="4 4"
                 />
                 <circle
@@ -140,9 +140,9 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                   cy={931 * 0.202}
                   r="80"
                   fill="none"
-                  stroke="#8CE0CF"
+                  stroke="#7DD3FC"
                   strokeWidth="1.5"
-                  strokeOpacity="0.55"
+                  strokeOpacity="0.6"
                   strokeDasharray="5 5"
                 />
               </svg>
@@ -155,7 +155,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
               >
                 <defs>
                   <filter
-                    id="celadonLineGlow"
+                    id="skyBlueLineGlow"
                     x="-50%"
                     y="-50%"
                     width="200%"
@@ -165,14 +165,14 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                       dx="0"
                       dy="0"
                       stdDeviation="1.2"
-                      floodColor="#68C3B1"
+                      floodColor="#38BDF8"
                       floodOpacity="0.95"
                     />
                     <feDropShadow
                       dx="0"
                       dy="0"
                       stdDeviation="2.5"
-                      floodColor="#2E7D6F"
+                      floodColor="#8FD0D4"
                       floodOpacity="0.85"
                     />
                   </filter>
@@ -183,15 +183,15 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                   const d = `M ${line.from.x} ${line.from.y} L ${line.to.x} ${line.to.y}`;
                   return (
                     <g key={line.id}>
-                      {/* Outer Celadon Glow Path */}
+                      {/* Outer Sky-Blue Glow Path */}
                       <motion.path
                         d={d}
                         fill="none"
-                        stroke="#68C3B1"
+                        stroke="#7DD3FC"
                         strokeWidth="6"
                         strokeLinecap="round"
                         vectorEffect="non-scaling-stroke"
-                        style={{ filter: "url(#celadonLineGlow)" }}
+                        style={{ filter: "url(#skyBlueLineGlow)" }}
                         initial={{ pathLength: 0, opacity: 0 }}
                         animate={{ pathLength: 1, opacity: 0.9 }}
                         transition={{
@@ -264,11 +264,11 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                       >
                         {/* Top Pointer Triangle (only on mobile when 13호관 badge is below dot) */}
                         {isMiddleNode && (
-                          <div className="sm:hidden w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[5px] border-b-[#0D2622]/95" />
+                          <div className="sm:hidden w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[5px] border-b-slate-900/90" />
                         )}
 
-                        <div className="bg-[#0D2622]/95 border border-[#68C3B1]/75 text-white px-2 py-0.5 sm:px-2.5 sm:py-1 rounded shadow-xl text-[11px] sm:text-xs font-bold tracking-tight flex flex-col sm:flex-row items-center gap-0 sm:gap-1.5 backdrop-blur-md leading-tight">
-                          <span className="text-[#8CE0CF]">{node.label}</span>
+                        <div className="bg-slate-900/90 border border-[#8FD0D4]/80 text-white px-2 py-0.5 sm:px-2.5 sm:py-1 rounded shadow-xl text-[11px] sm:text-xs font-bold tracking-tight flex flex-col sm:flex-row items-center gap-0 sm:gap-1.5 backdrop-blur-md leading-tight">
+                          <span className="text-[#8FD0D4]">{node.label}</span>
                           {node.subLabel && (
                             <span className="text-zinc-100 font-medium text-[9px] sm:text-[11px]">
                               <span className="hidden sm:inline">· </span>
@@ -281,17 +281,17 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                         <div
                           className={
                             isMiddleNode
-                              ? "hidden sm:block w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[5px] border-t-[#0D2622]/95"
-                              : "w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[5px] border-t-[#0D2622]/95"
+                              ? "hidden sm:block w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[5px] border-t-slate-900/90"
+                              : "w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[5px] border-t-slate-900/90"
                           }
                         />
                       </div>
 
-                      {/* Outer Celadon Pulse Ring */}
-                      <span className="absolute -inset-2 sm:-inset-2.5 rounded-full bg-[#68C3B1]/55 animate-ping" />
+                      {/* Outer Sky-Blue Pulse Ring */}
+                      <span className="absolute -inset-2 sm:-inset-2.5 rounded-full bg-[#38BDF8]/55 animate-ping" />
 
-                      {/* Glowing Celadon + White Core Dot */}
-                      <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-white border-2 border-[#68C3B1] shadow-[0_0_16px_4px_rgba(104,195,177,0.95)]" />
+                      {/* Glowing Sky-Blue + White Core Dot */}
+                      <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-white border-2 border-[#38BDF8] shadow-[0_0_16px_4px_rgba(56,189,248,0.95)]" />
                     </motion.div>
                   </div>
                 );
@@ -330,13 +330,13 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
               }}
               className="flex flex-col items-center max-w-full"
             >
-              {/* Subtle Celadon Wing / Flight Motif Above Logo */}
+              {/* Poster Sky-Blue Wing / Flight Motif Above Logo */}
               <div className="mb-3 flex items-center gap-2">
-                <span className="h-[2px] w-6 sm:w-8 md:w-12 bg-gradient-to-r from-transparent to-[#2E7D6F]" />
-                <span className="text-xs sm:text-sm font-bold tracking-widest text-[#2E7D6F] uppercase break-keep">
+                <span className="h-[2px] w-6 sm:w-8 md:w-12 bg-gradient-to-r from-transparent to-[#58B4BC]" />
+                <span className="text-xs sm:text-sm font-bold tracking-widest text-[#58B4BC] uppercase break-keep">
                   {ELECTION_INFO.collegeBadge} 선거운동본부
                 </span>
-                <span className="h-[2px] w-6 sm:w-8 md:w-12 bg-gradient-to-l from-transparent to-[#2E7D6F]" />
+                <span className="h-[2px] w-6 sm:w-8 md:w-12 bg-gradient-to-l from-transparent to-[#58B4BC]" />
               </div>
 
               {/* Clean Typography Logo (with optional /images/logo-bisang.png support) */}
@@ -353,7 +353,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
                     {ELECTION_INFO.teamHanja}
                   </h1>
                   <span
-                    className="ml-2 -mt-6 sm:-mt-8 inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#2E7D6F]"
+                    className="ml-2 -mt-6 sm:-mt-8 inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#78C7CC]"
                     aria-hidden="true"
                   />
                 </div>
@@ -369,7 +369,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
           <button
             type="button"
             onClick={handleFinish}
-            className="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 z-50 min-h-[44px] px-4 py-2.5 rounded-full bg-[#0D2622]/85 hover:bg-[#2E7D6F] active:scale-95 text-white border border-[#68C3B1]/35 text-xs sm:text-sm font-semibold tracking-wider backdrop-blur-md shadow-lg transition-all duration-200 cursor-pointer flex items-center justify-center"
+            className="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 z-50 min-h-[44px] px-4 py-2.5 rounded-full bg-slate-900/85 hover:bg-[#58B4BC] active:scale-95 text-white border border-[#8FD0D4]/60 text-xs sm:text-sm font-semibold tracking-wider backdrop-blur-md shadow-lg transition-all duration-200 cursor-pointer flex items-center justify-center"
             aria-label="인트로 건너뛰기"
           >
             SKIP &gt;

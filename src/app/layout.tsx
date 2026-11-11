@@ -6,7 +6,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#0D2622",
+  themeColor: "#8FD0D4",
 };
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    statusBarStyle: "black-translucent",
+    statusBarStyle: "default",
     title: "글로벌정경대학 飛上",
   },
 };
@@ -41,7 +41,7 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
         />
       </head>
-      <body className="min-h-[100dvh] bg-[#0D2622] text-white antialiased selection:bg-[#357F72] selection:text-white break-keep">
+      <body className="min-h-[100dvh] bg-[#F2F9FA] text-[#111827] antialiased selection:bg-[#8FD0D4] selection:text-[#111827] break-keep">
         {children}
       </body>
     </html>
