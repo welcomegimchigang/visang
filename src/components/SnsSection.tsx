@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
   BookOpen,
+  CalendarCheck2,
   FileText,
   Instagram,
   MessageSquareHeart,
@@ -85,7 +86,7 @@ export function SnsSection({ onTriggerToast }: SnsSectionProps) {
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-[#99DED0]/90 font-medium mt-2.5 sm:mt-3 break-keep">
-              학우 여러분과 언제나 가까이에서 소통하는 {ELECTION_INFO.teamFullTitle}이 되겠습니다
+              학우 여러분과 언제나 가까이에서 소통하는 기호 1번 {ELECTION_INFO.teamFullTitle}이 되겠습니다
             </p>
           </motion.div>
 
@@ -129,19 +130,33 @@ export function SnsSection({ onTriggerToast }: SnsSectionProps) {
             ))}
           </div>
 
-          {/* Clean Footer */}
-          <footer className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-[#76C7B7]/15 text-center space-y-1.5 sm:space-y-2">
-            <p className="text-xs sm:text-sm font-bold text-white/90 break-keep">
-              2027학년도 인천대학교 글로벌정경대학 학생회 선거운동본부{" "}
-              <span className="text-[#99DED0]">{ELECTION_INFO.teamFullTitle}</span>
-            </p>
-            <p className="text-[11px] sm:text-xs text-[#EDF5F2]/60 break-keep">
-              정후보 경제학과 21학번 최우헌 · 부후보 정치외교학과 24학번 손정현
-            </p>
-            <p className="text-[10px] sm:text-[11px] text-white/40 pt-1">
-              &copy; 2027 INU College of Global Politics and Economics Election Campaign{" "}
-              {ELECTION_INFO.teamHanja}. All rights reserved.
-            </p>
+          {/* Official Election Footer with Voting Period & Election Commission Bar */}
+          <footer className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-[#76C7B7]/15 text-center space-y-3">
+            {/* Official Poster Bottom Bar Badge */}
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 py-2 rounded-2xl bg-[#163B34]/90 border border-[#96D1CD]/35 text-xs sm:text-sm font-bold text-[#99DED0]">
+              <span className="inline-flex items-center gap-1.5 text-white">
+                <CalendarCheck2 className="w-4 h-4 text-[#96D1CD] shrink-0" />
+                <span>투표일 : 11월 24일(화) - 11월 26일(목)</span>
+              </span>
+              <span className="text-[#96D1CD]/40 hidden sm:inline">|</span>
+              <span className="text-[#99DED0]">
+                인천대학교 학생회 총선거 중앙선거관리위원회
+              </span>
+            </div>
+
+            <div className="space-y-1 pt-1">
+              <p className="text-xs sm:text-sm font-bold text-white/90 break-keep">
+                2027년도 인천대학교 학생회 총선거 글로벌정경대학 기호 1번{" "}
+                <span className="text-[#99DED0]">{ELECTION_INFO.teamFullTitle}</span>
+              </p>
+              <p className="text-[11px] sm:text-xs text-[#EDF5F2]/65 break-keep">
+                정후보 경제학과 21학번 최우헌 · 부후보 정치외교학과 24학번 손정현
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-white/40 pt-1">
+                &copy; 2027 INU College of Global Politics and Economics Election Campaign{" "}
+                {ELECTION_INFO.teamHanja}. All rights reserved.
+              </p>
+            </div>
           </footer>
         </div>
       </section>

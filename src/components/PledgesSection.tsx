@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Expand, FileText, X } from "lucide-react";
 import { ELECTION_INFO, PLEDGE_CATEGORIES } from "@/constants/electionData";
 
 export function PledgesSection() {
@@ -9,6 +10,7 @@ export function PledgesSection() {
     PLEDGE_CATEGORIES[0]?.id ?? "culture"
   );
   const [posterError, setPosterError] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const activeCategory =
     PLEDGE_CATEGORIES.find((cat) => cat.id === activeTabId) ??
@@ -33,11 +35,16 @@ export function PledgesSection() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center space-y-2 sm:space-y-3 mb-6 sm:mb-10"
         >
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#357F72]/15 border border-[#357F72]/30 text-[#0D2622] text-xs font-extrabold">
+            <span>글로벌정경대학 기호 1번 {ELECTION_INFO.teamFullTitle}</span>
+            <span>·</span>
+            <span>총 {totalPledgeCount}개 핵심 공약</span>
+          </div>
           <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-[#0D2622]">
-            ✦ 공약 ✦
+            ✦ 부문별 핵심 공약 ✦
           </h2>
           <p className="text-xs sm:text-base text-[#4B5563] font-medium break-keep">
-            카테고리 탭을 클릭하여 부문별 핵심 공약을 확인해보세요
+            카테고리 탭을 클릭하여 {PLEDGE_CATEGORIES.length}대 부문 {totalPledgeCount}개 공약을 확인해보세요
           </p>
         </motion.div>
 
@@ -132,17 +139,51 @@ export function PledgesSection() {
               </AnimatePresence>
             </div>
 
-            {/* Right (5 cols): Fixed Goryeo Celadon Pledge Summary Poster Card */}
+            {/* Right (5 cols): Official A2 Election Poster Preview + Category Summary */}
             <div className="lg:col-span-5 w-full lg:sticky lg:top-24">
-              <div className="rounded-2xl overflow-hidden border border-[#357F72]/30 bg-gradient-to-b from-[#0D2622] via-[#163B34] to-[#357F72] text-white shadow-lg">
-                {/* Optional External Poster Image Preview */}
+              <div className="rounded-2xl overflow-hidden border border-[#357F72]/35 bg-gradient-to-b from-[#0D2622] via-[#163B34] to-[#357F72] text-white shadow-lg">
+                {/* Official Poster Image Preview (Immediately visible with opacity-100!) */}
                 {!posterError && (
-                  <img
-                    src="/images/pledge-poster.jpg"
-                    alt="2027 글로벌정경대학 비상 핵심 공약 포스터"
-                    onError={() => setPosterError(true)}
-                    className="w-full h-auto object-cover block border-b border-white/10"
-                  />
+                  <div className="relative group bg-[#0D2622] border-b border-[#96D1CD]/25">
+                    <button
+                      type="button"
+                      onClick={() => setLightboxOpen(true)}
+                      aria-label="공식 선거 포스터 크게 보기"
+                      className="relative block w-full text-left focus:outline-none overflow-hidden"
+                    >
+                      <img
+                        src="/images/pledge-poster.jpg"
+                        alt="2027년도 글로벌정경대학 학생회 총선거 기호 1번 비상 공식 A2 선거 포스터"
+                        onError={() => setPosterError(true)}
+                        className="w-full h-auto object-contain block opacity-100 group-hover:scale-[1.015] transition-transform duration-300"
+                      />
+                      <div className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0D2622]/85 backdrop-blur-md border border-[#96D1CD]/45 text-xs font-bold text-[#99DED0] shadow-lg">
+                        <Expand className="w-3.5 h-3.5" />
+                        <span>포스터 크게 보기</span>
+                      </div>
+                    </button>
+
+                    {/* Action Bar below Poster Image */}
+                    <div className="px-4 py-2.5 bg-[#0D2622]/95 border-t border-[#96D1CD]/20 flex items-center justify-between gap-2 text-xs">
+                      <button
+                        type="button"
+                        onClick={() => setLightboxOpen(true)}
+                        className="inline-flex items-center gap-1.5 font-bold text-[#99DED0] hover:text-white transition-colors"
+                      >
+                        <Expand className="w-3.5 h-3.5 text-[#96D1CD]" />
+                        <span>고화질 포스터 확대</span>
+                      </button>
+                      <a
+                        href="/poster-2027.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#357F72] hover:bg-[#2E7568] text-white font-bold transition-colors"
+                      >
+                        <FileText className="w-3.5 h-3.5 text-[#99DED0]" />
+                        <span>원본 PDF 열기</span>
+                      </a>
+                    </div>
+                  </div>
                 )}
 
                 {/* Fixed Signature Goryeo Celadon Overall Pledge Summary Poster Card */}
@@ -159,10 +200,10 @@ export function PledgesSection() {
                   <div className="relative z-10 border-b border-[#76C7B7]/20 pb-3.5 sm:pb-4">
                     <div className="flex items-center justify-between gap-2 mb-1.5">
                       <span className="px-2 py-0.5 rounded bg-[#357F72] border border-[#99DED0]/40 text-[#EDF5F2] text-[10px] sm:text-[11px] font-bold">
-                        {ELECTION_INFO.collegeBadge} 선거운동본부
+                        {ELECTION_INFO.collegeBadge} 기호 1번
                       </span>
                       <span className="text-[11px] sm:text-xs font-bold text-[#99DED0]">
-                        4대 부문 · {totalPledgeCount}개 공약
+                        {PLEDGE_CATEGORIES.length}대 부문 · {totalPledgeCount}개 공약
                       </span>
                     </div>
                     <h4 className="text-base sm:text-xl font-black text-white tracking-tight break-keep">
@@ -227,9 +268,9 @@ export function PledgesSection() {
 
                   {/* Poster Footer */}
                   <div className="relative z-10 pt-2 border-t border-[#76C7B7]/20 flex items-center justify-between text-[11px] text-[#EDF5F2]/80">
-                    <span>인천대학교 글로벌정경대학 학생회 선거</span>
+                    <span>투표일 : 11월 24일(화) - 11월 26일(목)</span>
                     <span className="font-bold text-[#99DED0]">
-                      {ELECTION_INFO.teamFullTitle}
+                      기호 1번 {ELECTION_INFO.teamFullTitle}
                     </span>
                   </div>
                 </div>
@@ -238,6 +279,57 @@ export function PledgesSection() {
           </div>
         </div>
       </div>
+
+      {/* Full-Screen Poster Lightbox Modal */}
+      <AnimatePresence>
+        {lightboxOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setLightboxOpen(false)}
+            className="fixed inset-0 z-50 bg-[#0D2622]/90 backdrop-blur-md p-3 sm:p-6 flex flex-col items-center justify-center"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl w-full max-h-[90vh] bg-[#0D2622] border border-[#96D1CD]/40 rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+            >
+              <div className="px-4 py-3 bg-[#163B34] border-b border-[#96D1CD]/25 flex items-center justify-between gap-2 text-white">
+                <span className="text-xs sm:text-sm font-extrabold truncate">
+                  2027년도 글로벌정경대학 기호 1번 飛上 (비상) 공식 선거 포스터
+                </span>
+                <div className="flex items-center gap-2 shrink-0">
+                  <a
+                    href="/poster-2027.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#357F72] hover:bg-[#2E7568] text-xs font-bold text-white transition-colors"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-[#99DED0]" />
+                    <span>PDF 보기</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setLightboxOpen(false)}
+                    aria-label="포스터 닫기"
+                    className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+              <div className="overflow-auto p-2 sm:p-4 flex justify-center bg-[#0D2622]">
+                <img
+                  src="/images/pledge-poster.jpg"
+                  alt="2027년도 글로벌정경대학 학생회 총선거 기호 1번 비상 공식 선거 포스터 확대 이미지"
+                  className="max-w-full h-auto object-contain block opacity-100 rounded-lg"
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

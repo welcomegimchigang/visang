@@ -23,15 +23,15 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-[#0D2622]/90 border-b border-[#76C7B7]/15 text-white transition-colors">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 md:h-20 flex items-center justify-between gap-2">
-        {/* Left: Compact College Badge + 飛上 Logo */}
+        {/* Left: Compact College Badge + 기호 1번 飛上 Logo */}
         <button
           type="button"
           onClick={scrollToTop}
           className="flex items-center gap-2 sm:gap-3 group text-left focus:outline-none shrink-0 active:scale-[0.98] transition-transform"
           aria-label="상단으로 이동"
         >
-          <span className="bg-[#357F72] text-white text-[11px] sm:text-xs font-bold px-2.5 py-1 sm:px-3 sm:py-1 rounded-md tracking-tight shadow-sm border border-[#99DED0]/30 group-hover:bg-[#2E7568] transition-colors">
-            {ELECTION_INFO.collegeBadge}
+          <span className="bg-[#357F72] text-white text-[11px] sm:text-xs font-bold px-2.5 py-1 sm:px-3 sm:py-1 rounded-md tracking-tight shadow-sm border border-[#99DED0]/35 group-hover:bg-[#2E7568] transition-colors">
+            {ELECTION_INFO.collegeBadge} 기호 1번
           </span>
           <div className="flex items-baseline gap-1">
             <span className="text-lg sm:text-xl md:text-2xl font-black tracking-tight text-white group-hover:text-[#99DED0] transition-colors">

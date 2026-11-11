@@ -2,7 +2,13 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Award, CheckCircle2, Sparkles, UserCheck } from "lucide-react";
+import {
+  Award,
+  CalendarCheck2,
+  CheckCircle2,
+  Sparkles,
+  UserCheck,
+} from "lucide-react";
 import { CANDIDATES, ELECTION_INFO } from "@/constants/electionData";
 
 function splitYearAndCareer(career: string): { year: string | null; text: string } {
@@ -16,87 +22,122 @@ function splitYearAndCareer(career: string): { year: string | null; text: string
 export function CandidatesSection() {
   const [imageError, setImageError] = useState(false);
 
+  const electionInfoExt = ELECTION_INFO as typeof ELECTION_INFO & {
+    candidateNumber?: string;
+    votingDate?: string;
+  };
+  const votingDateText =
+    electionInfoExt.votingDate || "투표일 : 11월 24일(화) - 11월 26일(목)";
+
   const renderPhotoCard = () => (
-    <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-b from-[#163B34]/90 via-[#0D2622]/95 to-[#0D2622] border border-[#76C7B7]/35 shadow-[0_16px_40px_rgba(13,38,34,0.5)]">
+    <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-b from-[#163B34] via-[#0D2622] to-[#0D2622] border border-[#96D1CD]/45 shadow-[0_20px_50px_rgba(13,38,34,0.55)]">
       {/* Top Decorative Celadon Accent Bar */}
-      <div className="h-1.5 w-full bg-gradient-to-r from-[#2E7568] via-[#5BB5A2] to-[#99DED0]" />
+      <div className="h-1.5 w-full bg-gradient-to-r from-[#357F72] via-[#96D1CD] to-[#99DED0]" />
+
+      {/* Top Header Strip inside Photo Card */}
+      <div className="px-4 py-3 sm:px-6 sm:py-4 bg-[#0D2622]/90 border-b border-[#96D1CD]/20 flex items-center justify-between gap-2">
+        <div className="min-w-0">
+          <p className="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-[#96D1CD]">
+            2027년도 학생회 총선거 글로벌정경대학 기호 1번
+          </p>
+          <h3 className="text-sm sm:text-base font-black text-white mt-0.5 truncate">
+            글로벌정경대학 선거운동본부{" "}
+            <span className="text-[#99DED0]">{ELECTION_INFO.teamFullTitle}</span>
+          </h3>
+        </div>
+        <span className="px-2.5 py-1 rounded-xl bg-[#357F72] border border-[#96D1CD]/45 text-white font-black text-xs sm:text-sm shrink-0 shadow-sm">
+          기호 1번
+        </span>
+      </div>
 
       {!imageError ? (
-        <div className="relative w-full">
-          <img
-            src="/images/candidates-hero.png"
-            alt="2027학년도 글로벌정경대학 학생회 선거운동본부 비상 정후보 최우헌, 부후보 손정현 프로필 사진"
-            onError={() => setImageError(true)}
-            className="w-full h-auto object-cover block"
-          />
-        </div>
-      ) : (
-        /* Sophisticated Goryeo Celadon Silhouette Placeholder Card */
-        <div className="p-4 sm:p-7 flex flex-col justify-between min-h-[340px] sm:min-h-[480px] relative overflow-hidden">
-          {/* Subtle Watermark */}
+        <div className="relative w-full bg-gradient-to-b from-[#96D1CD]/25 via-[#357F72]/20 to-[#0D2622] pt-3 sm:pt-5 overflow-hidden">
+          {/* Subtle Celadon Glow Backdrop behind Cutout Candidates */}
           <div
             aria-hidden="true"
-            className="pointer-events-none select-none absolute -right-3 top-6 text-7xl sm:text-8xl font-black text-white/5 tracking-widest"
+            className="pointer-events-none select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-[#96D1CD]/30 blur-3xl"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none select-none absolute top-4 inset-x-0 text-center text-6xl sm:text-7xl font-black text-white/10 tracking-widest"
           >
             {ELECTION_INFO.teamHanja}
           </div>
 
-          {/* Top Emblem */}
-          <div className="relative z-10 flex items-center justify-between gap-2 border-b border-[#76C7B7]/15 pb-3.5">
-            <div className="min-w-0">
-              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#99DED0]">
-                OFFICIAL CANDIDATES PROFILE
-              </p>
-              <h3 className="text-sm sm:text-lg font-extrabold text-white mt-0.5 break-keep">
-                2027 글로벌정경대학 선거운동본부{" "}
-                <span className="text-[#99DED0]">{ELECTION_INFO.teamHanja}</span>
-              </h3>
-            </div>
-            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-[#357F72]/55 border border-[#99DED0]/40 flex items-center justify-center text-white font-black text-xs sm:text-sm shrink-0">
-              {ELECTION_INFO.teamHanja}
-            </div>
-          </div>
+          <img
+            src="/images/candidates-hero.png"
+            alt="2027년도 글로벌정경대학 학생회 총선거 기호 1번 비상 부후보 손정현(좌), 정후보 최우헌(우) 공식 프로필 사진"
+            onError={() => setImageError(true)}
+            className="relative z-10 w-full h-auto object-contain block opacity-100"
+          />
 
-          {/* Dual Candidate Silhouette Cards */}
-          <div className="relative z-10 grid grid-cols-2 gap-3 sm:gap-4 my-4 sm:my-6">
-            {CANDIDATES.map((candidate) => (
-              <div
-                key={candidate.name}
-                className="group rounded-2xl bg-gradient-to-b from-[#357F72]/40 to-[#0D2622]/85 border border-[#76C7B7]/30 p-3 sm:p-4 flex flex-col items-center text-center shadow-inner"
-              >
-                {/* Stylized Avatar Silhouette */}
-                <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-[#163B34] via-[#357F72] to-[#76C7B7]/75 border-2 border-[#99DED0]/55 flex flex-col items-center justify-end overflow-hidden shadow-lg mb-2.5 sm:mb-3 relative">
-                  <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#EDF5F2]/90 mb-1" />
-                  <div className="w-12 h-7 sm:w-16 sm:h-9 rounded-t-full bg-[#EDF5F2]/85" />
+          {/* Bottom Name Badges Overlay Matching Cutout Photo Positions (Left: 부후보 손정현, Right: 정후보 최우헌) */}
+          <div className="relative z-20 bg-gradient-to-t from-[#0D2622] via-[#0D2622]/95 to-[#0D2622]/80 border-t border-[#96D1CD]/25 p-3 sm:p-4">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              {/* Left in Photo: 부후보 손정현 */}
+              <div className="rounded-xl bg-[#163B34]/90 border border-[#96D1CD]/35 px-3 py-2 sm:px-3.5 sm:py-2.5 text-center shadow-sm">
+                <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#357F72] text-[#99DED0] text-[10px] sm:text-[11px] font-extrabold mb-0.5">
+                  <span>부후보</span>
                 </div>
-
-                <span className="px-2 py-0.5 rounded-full bg-[#357F72] text-[#99DED0] text-[10px] sm:text-[11px] font-bold tracking-tight mb-1 border border-[#99DED0]/25">
-                  {candidate.role}
-                </span>
-                <p className="text-sm sm:text-lg font-extrabold text-white">
-                  {candidate.name}
+                <p className="text-sm sm:text-base font-black text-white tracking-tight">
+                  손정현
                 </p>
-                <p className="text-[11px] sm:text-xs text-[#99DED0]/90 font-medium mt-0.5 break-keep">
-                  {candidate.department}
+                <p className="text-[11px] sm:text-xs font-medium text-[#96D1CD] break-keep">
+                  정치외교학과 24
                 </p>
               </div>
-            ))}
-          </div>
 
-          {/* Bottom Slogan & Preview Indicator */}
-          <div className="relative z-10 rounded-xl sm:rounded-2xl bg-[#0D2622]/85 border border-[#76C7B7]/15 p-3 sm:p-4 space-y-1.5 sm:space-y-2">
-            <div className="flex items-center justify-between gap-2 text-[11px] sm:text-xs text-[#99DED0]">
-              <span className="inline-flex items-center gap-1.5 font-semibold">
-                <UserCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#76C7B7] shrink-0" />
-                <span>정후보 최우헌 · 부후보 손정현</span>
+              {/* Right in Photo: 정후보 최우헌 */}
+              <div className="rounded-xl bg-[#163B34]/90 border border-[#96D1CD]/35 px-3 py-2 sm:px-3.5 sm:py-2.5 text-center shadow-sm">
+                <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#357F72] text-[#99DED0] text-[10px] sm:text-[11px] font-extrabold mb-0.5">
+                  <span>정후보</span>
+                </div>
+                <p className="text-sm sm:text-base font-black text-white tracking-tight">
+                  최우헌
+                </p>
+                <p className="text-[11px] sm:text-xs font-medium text-[#96D1CD] break-keep">
+                  경제학과 21
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between gap-2 text-[11px] sm:text-xs text-[#99DED0]">
+              <span className="inline-flex items-center gap-1.5 font-bold">
+                <CalendarCheck2 className="w-3.5 h-3.5 text-[#96D1CD] shrink-0" />
+                <span>{votingDateText}</span>
               </span>
-              <span className="text-[10px] sm:text-[11px] text-white/55 font-mono truncate">
-                /images/candidates-hero.png
+              <span className="font-extrabold text-white hidden sm:inline">
+                {ELECTION_INFO.teamFullTitle}
               </span>
             </div>
-            <p className="text-xs sm:text-sm font-semibold text-white/90 text-center pt-1.5 border-t border-white/10">
-              &ldquo;{ELECTION_INFO.mainSlogan}&rdquo;
-            </p>
+          </div>
+        </div>
+      ) : (
+        /* Fallback Silhouette Card if /images/candidates-hero.png fails */
+        <div className="p-4 sm:p-7 flex flex-col justify-between min-h-[340px] sm:min-h-[460px] relative overflow-hidden">
+          <div className="relative z-10 grid grid-cols-2 gap-3 sm:gap-4 my-4 sm:my-6">
+            <div className="rounded-2xl bg-gradient-to-b from-[#357F72]/40 to-[#0D2622]/85 border border-[#96D1CD]/30 p-3 sm:p-4 flex flex-col items-center text-center">
+              <span className="px-2 py-0.5 rounded-full bg-[#357F72] text-[#99DED0] text-[10px] sm:text-[11px] font-bold mb-1">
+                부후보
+              </span>
+              <p className="text-sm sm:text-lg font-extrabold text-white">손정현</p>
+              <p className="text-[11px] sm:text-xs text-[#99DED0]/90 font-medium mt-0.5">
+                정치외교학과 24학번
+              </p>
+            </div>
+            <div className="rounded-2xl bg-gradient-to-b from-[#357F72]/40 to-[#0D2622]/85 border border-[#96D1CD]/30 p-3 sm:p-4 flex flex-col items-center text-center">
+              <span className="px-2 py-0.5 rounded-full bg-[#357F72] text-[#99DED0] text-[10px] sm:text-[11px] font-bold mb-1">
+                정후보
+              </span>
+              <p className="text-sm sm:text-lg font-extrabold text-white">최우헌</p>
+              <p className="text-[11px] sm:text-xs text-[#99DED0]/90 font-medium mt-0.5">
+                경제학과 21학번
+              </p>
+            </div>
+          </div>
+          <div className="relative z-10 rounded-xl bg-[#0D2622]/85 border border-[#76C7B7]/15 p-3 text-center text-xs text-[#99DED0] font-semibold">
+            <UserCheck className="w-4 h-4 inline mr-1.5 text-[#76C7B7]" />
+            {votingDateText}
           </div>
         </div>
       )}
@@ -111,7 +152,7 @@ export function CandidatesSection() {
       {/* Subtle Celadon Jade Atmospheric Light Glows */}
       <div
         aria-hidden="true"
-        className="pointer-events-none select-none absolute -top-32 -left-32 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-[#76C7B7]/15 blur-3xl"
+        className="pointer-events-none select-none absolute -top-32 -left-32 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-[#96D1CD]/15 blur-3xl"
       />
       <div
         aria-hidden="true"
@@ -129,10 +170,18 @@ export function CandidatesSection() {
               transition={{ duration: 0.55, ease: "easeOut" }}
               className="space-y-3 sm:space-y-4 text-center sm:text-left"
             >
-              {/* Top Rounded Badge */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-[#357F72]/60 border border-[#99DED0]/35 text-[#EDF5F2] text-[11px] sm:text-xs font-semibold tracking-tight shadow-sm backdrop-blur-sm">
-                <Sparkles className="w-3.5 h-3.5 text-[#99DED0] shrink-0" />
-                <span className="break-keep">{ELECTION_INFO.badge}</span>
+              {/* Top Rounded Badges */}
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-[#357F72]/70 border border-[#96D1CD]/45 text-[#EDF5F2] text-[11px] sm:text-xs font-bold tracking-tight shadow-sm backdrop-blur-sm">
+                  <Sparkles className="w-3.5 h-3.5 text-[#99DED0] shrink-0" />
+                  <span className="break-keep">
+                    2027년도 학생회 총선거 글로벌정경대학 기호 1번
+                  </span>
+                </div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#0D2622]/75 border border-[#96D1CD]/35 text-[#99DED0] text-[11px] sm:text-xs font-bold tracking-tight">
+                  <CalendarCheck2 className="w-3.5 h-3.5 text-[#96D1CD] shrink-0" />
+                  <span>{votingDateText}</span>
+                </div>
               </div>
 
               {/* Main Title */}
@@ -170,14 +219,14 @@ export function CandidatesSection() {
                     delay: 0.1 * (index + 1),
                     ease: "easeOut",
                   }}
-                  className="rounded-2xl bg-[#0D2622]/60 backdrop-blur-md border border-[#76C7B7]/30 p-4 sm:p-6 shadow-[0_12px_32px_rgba(13,38,34,0.35)] hover:border-[#99DED0]/55 transition-colors"
+                  className="rounded-2xl bg-[#0D2622]/65 backdrop-blur-md border border-[#96D1CD]/35 p-4 sm:p-6 shadow-[0_12px_32px_rgba(13,38,34,0.35)] hover:border-[#99DED0]/60 transition-colors"
                 >
                   {/* Candidate Header */}
                   <div className="pb-3.5 mb-3.5 border-b border-[#76C7B7]/15 flex flex-wrap items-center justify-between gap-2">
                     <div>
                       <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#357F72] text-[#EDF5F2] text-[11px] sm:text-xs font-bold mb-1.5 border border-[#99DED0]/25">
                         <Award className="w-3.5 h-3.5 text-[#99DED0]" />
-                        <span>{candidate.role}</span>
+                        <span>기호 1번 · {candidate.role}</span>
                       </div>
                       <h2 className="text-base sm:text-xl font-extrabold text-white tracking-tight break-keep">
                         {candidate.fullTitle}
