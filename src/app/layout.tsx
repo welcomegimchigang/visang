@@ -10,7 +10,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://visang-99u.pages.dev"),
+  metadataBase: new URL("https://global-visang.com"),
   title: {
     default:
       "인천대 글로벌정경대학 기호 1번 비상(飛上) | 2027학년도 학생회 총선거",
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     title: "2027 인천대학교 글로벌정경대학 기호 1번 비상(飛上)",
     description:
       "비상: 함께 더 높이, 더 멀리 | 정후보 최우헌 · 부후보 손정현 — 글정경 4대 부문 27개 핵심 공약 안내 (투표일: 11월 24일 ~ 11월 26일)",
-    url: "https://visang-99u.pages.dev",
+    url: "https://global-visang.com",
     siteName: "인천대학교 글로벌정경대학 기호 1번 비상(飛上)",
     type: "website",
     locale: "ko_KR",
