@@ -30,7 +30,7 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-[#74C3C9]/95 border-b border-white/40 text-white shadow-[0_4px_20px_rgba(116,195,201,0.28)] transition-colors">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 md:h-20 flex items-center justify-between gap-2">
-        {/* Left: Compact College Badge + 기호 1번 飛上 Logo */}
+        {/* Left: Compact College Badge + 飛上 Logo */}
         <button
           type="button"
           onClick={scrollToTop}
@@ -38,7 +38,7 @@ export function Navbar() {
           aria-label="상단으로 이동"
         >
           <span className="bg-white text-[#358C94] text-[11px] sm:text-xs font-extrabold px-2.5 py-1 sm:px-3 sm:py-1 rounded-full tracking-tight shadow-sm group-hover:bg-[#F2F9FA] transition-colors">
-            {ELECTION_INFO.collegeBadge} 기호 1번
+            {ELECTION_INFO.collegeBadge}
           </span>
           <div className="flex items-baseline gap-1">
             <span className="text-lg sm:text-xl md:text-2xl font-black tracking-tight text-white drop-shadow-sm">

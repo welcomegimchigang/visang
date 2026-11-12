@@ -72,7 +72,7 @@ export const INTRO_NODES: IntroNode[] = [
   {
     id: "node-5",
     label: "5호관",
-    subLabel: "자연과학대학",
+    subLabel: "소비자학과",
     x: 66.8,
     y: 38.5,
     appearAt: 0.3,
@@ -80,7 +80,7 @@ export const INTRO_NODES: IntroNode[] = [
   {
     id: "node-13",
     label: "13호관",
-    subLabel: "사회과학대학",
+    subLabel: "정치외교학과ㆍ행정학과",
     x: 54.8,
     y: 26.2,
     appearAt: 1.2,
@@ -88,7 +88,7 @@ export const INTRO_NODES: IntroNode[] = [
   {
     id: "node-14",
     label: "14호관",
-    subLabel: "글로벌정경대학·경영대학",
+    subLabel: "경제학과ㆍGTS학부",
     x: 48.8,
     y: 20.2,
     appearAt: 2.1,
@@ -139,7 +139,7 @@ export const CANDIDATES: Candidate[] = [
       "2024년 인천대학교 정치외교학과 학생회 홍보국원",
       "2025년 인천대학교 정치외교학과 학생회 홍보국장",
       "2025년 인천대학교 정치외교학과 2학년 과대표",
-      "2026년 인천대학교 정치외교학과 학생회장",
+      "2026년 인천대학교 정치외교학과 학생회 학생회장",
     ],
   },
 ];
