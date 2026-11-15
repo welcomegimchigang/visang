@@ -50,6 +50,9 @@ export interface ElectionInfo {
   commissionName: string;
 }
 
+export const POLICY_BOOK_URL =
+  "https://www.miricanvas.com/v2/ko/design2/v/6ee5a430-5648-444e-b7af-2b843a109f57";
+
 export const ELECTION_INFO: ElectionInfo = {
   badge: "2027년도 학생회 총선거 글로벌정경대학 기호 1번",
   collegeBadge: "글로벌정경대학 기호 1번",

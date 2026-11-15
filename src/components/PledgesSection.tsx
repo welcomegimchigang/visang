@@ -2,8 +2,12 @@
 
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Expand, X } from "lucide-react";
-import { ELECTION_INFO, PLEDGE_CATEGORIES } from "@/constants/electionData";
+import { Expand, ExternalLink, BookOpen, X } from "lucide-react";
+import {
+  ELECTION_INFO,
+  PLEDGE_CATEGORIES,
+  POLICY_BOOK_URL,
+} from "@/constants/electionData";
 
 export function PledgesSection() {
   const [activeTabId, setActiveTabId] = useState<string>(
@@ -46,6 +50,18 @@ export function PledgesSection() {
           <p className="text-xs sm:text-base text-[#4B5563] font-medium break-keep">
             카테고리 탭을 클릭하여 {PLEDGE_CATEGORIES.length}대 부문 {totalPledgeCount}개 공약을 확인해보세요
           </p>
+          <div className="pt-1.5">
+            <a
+              href={POLICY_BOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#58B4BC] hover:bg-[#4AA8B0] active:scale-95 text-white text-xs sm:text-sm font-extrabold shadow-[0_8px_20px_rgba(88,180,188,0.35)] border-2 border-white transition-all"
+            >
+              <BookOpen className="w-4 h-4 shrink-0" />
+              <span>비상(飛上) 정책자료집 바로보기</span>
+              <ExternalLink className="w-3.5 h-3.5 shrink-0 opacity-90" />
+            </a>
+          </div>
         </motion.div>
 
         {/* 4 Category Tab Buttons: Balanced 2x2 Grid on Mobile, Flex Row on Tablet/Desktop */}
@@ -165,27 +181,46 @@ export function PledgesSection() {
                   </button>
                 </div>
 
-                {/* 정책자료집 QR 코드 안내 카드 */}
-                <div className="rounded-2xl border-2 border-[#8FD0D4] bg-gradient-to-r from-[#EAF6F7] via-white to-[#EAF6F7] p-4 sm:p-5 shadow-[0_10px_28px_rgba(116,195,201,0.18)] flex items-center gap-4">
-                  <img
-                    src="/images/qr-homepage.png"
-                    alt="글로벌정경대학 기호 1번 비상 정책자료집 QR코드"
-                    width={104}
-                    height={104}
-                    className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-xl border-2 border-[#8FD0D4] p-1.5 bg-white shadow-sm"
-                  />
-                  <div className="min-w-0 space-y-1.5 text-left">
-                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#58B4BC] text-white text-[11px] font-extrabold shadow-sm">
-                      정책자료집 QR
-                    </span>
-                    <h4 className="text-sm sm:text-base font-black text-[#111827] tracking-tight break-keep">
-                      자세한 공약 내용은 정책자료집에서 확인하세요
-                    </h4>
-                    <p className="text-[11px] sm:text-xs font-bold text-[#358C94] leading-snug break-keep">
-                      QR 코드를 카메라로 스캔하면 기호 1번 비상의 전체 정책자료집으로 연결됩니다.
-                    </p>
+                {/* 정책자료집 QR 코드 및 바로가기 카드 (터치/클릭 시 링크 이동) */}
+                <a
+                  href={POLICY_BOOK_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="비상 정책자료집 바로가기 (새 창 열림)"
+                  className="group block rounded-2xl border-2 border-[#8FD0D4] hover:border-[#4AA8B0] bg-gradient-to-r from-[#EAF6F7] via-white to-[#EAF6F7] p-4 sm:p-5 shadow-[0_10px_28px_rgba(116,195,201,0.18)] hover:shadow-[0_14px_34px_rgba(74,168,176,0.28)] active:scale-[0.99] transition-all"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="relative shrink-0">
+                      <img
+                        src="/images/qr-homepage.png"
+                        alt="글로벌정경대학 기호 1번 비상 정책자료집 QR코드"
+                        width={104}
+                        height={104}
+                        className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl border-2 border-[#8FD0D4] group-hover:border-[#4AA8B0] p-1.5 bg-white shadow-sm transition-colors"
+                      />
+                      <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-0.5 rounded-full bg-[#111827]/85 text-white text-[10px] font-extrabold shadow">
+                        터치 시 이동
+                      </span>
+                    </div>
+                    <div className="min-w-0 flex-1 space-y-1.5 text-left">
+                      <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#58B4BC] text-white text-[11px] font-extrabold shadow-sm">
+                        정책자료집 QR · 링크
+                      </span>
+                      <h4 className="text-sm sm:text-base font-black text-[#111827] group-hover:text-[#358C94] tracking-tight break-keep transition-colors">
+                        자세한 공약 내용은 정책자료집에서 확인하세요
+                      </h4>
+                      <p className="text-[11px] sm:text-xs font-bold text-[#358C94] leading-snug break-keep">
+                        QR 코드를 터치하거나 아래 버튼을 누르면 정책자료집으로 바로 연결됩니다.
+                      </p>
+                      <div className="pt-1">
+                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#58B4BC] group-hover:bg-[#4AA8B0] text-white text-xs font-extrabold shadow-sm transition-colors">
+                          <span>정책자료집 바로 열기</span>
+                          <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </a>
               </div>
             )}
           </div>
