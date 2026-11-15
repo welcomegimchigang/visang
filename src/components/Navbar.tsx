@@ -23,8 +23,7 @@ export function Navbar() {
   const visibleNavItems = NAV_ITEMS.filter(
     (item) =>
       item.href !== "#sns" &&
-      !item.label.toUpperCase().includes("SNS") &&
-      !item.label.includes("공약안내서")
+      !item.label.toUpperCase().includes("SNS")
   );
 
   return (

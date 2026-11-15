@@ -139,11 +139,11 @@ export function PledgesSection() {
               </AnimatePresence>
             </div>
 
-            {/* Right (5 cols): Official A2 Election Poster Image ONLY */}
+            {/* Right (5 cols): Official A2 Election Poster Image + 정책자료집 QR Card */}
             {!posterError && (
               <div
                 id="poster"
-                className="lg:col-span-5 w-full lg:sticky lg:top-24 scroll-mt-20"
+                className="lg:col-span-5 w-full lg:sticky lg:top-24 scroll-mt-20 space-y-4"
               >
                 <div className="rounded-2xl overflow-hidden border-2 border-[#8FD0D4] bg-white shadow-[0_14px_35px_rgba(116,195,201,0.22)]">
                   <button
@@ -163,6 +163,28 @@ export function PledgesSection() {
                       <span>포스터 크게 보기</span>
                     </div>
                   </button>
+                </div>
+
+                {/* 정책자료집 QR 코드 안내 카드 */}
+                <div className="rounded-2xl border-2 border-[#8FD0D4] bg-gradient-to-r from-[#EAF6F7] via-white to-[#EAF6F7] p-4 sm:p-5 shadow-[0_10px_28px_rgba(116,195,201,0.18)] flex items-center gap-4">
+                  <img
+                    src="/images/qr-homepage.png"
+                    alt="글로벌정경대학 기호 1번 비상 정책자료집 QR코드"
+                    width={104}
+                    height={104}
+                    className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-xl border-2 border-[#8FD0D4] p-1.5 bg-white shadow-sm"
+                  />
+                  <div className="min-w-0 space-y-1.5 text-left">
+                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#58B4BC] text-white text-[11px] font-extrabold shadow-sm">
+                      정책자료집 QR
+                    </span>
+                    <h4 className="text-sm sm:text-base font-black text-[#111827] tracking-tight break-keep">
+                      자세한 공약 내용은 정책자료집에서 확인하세요
+                    </h4>
+                    <p className="text-[11px] sm:text-xs font-bold text-[#358C94] leading-snug break-keep">
+                      QR 코드를 카메라로 스캔하면 기호 1번 비상의 전체 정책자료집으로 연결됩니다.
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
