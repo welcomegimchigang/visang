@@ -52,6 +52,28 @@ export function SnsSection() {
       <footer className="relative overflow-hidden bg-gradient-to-r from-[#74C3C9] via-[#8FD0D4] to-[#74C3C9] text-white pt-10 sm:pt-12 pb-24 sm:pb-16 border-t-2 border-white/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center text-center space-y-4">
+            {/* Homepage QR Code Card */}
+            <div className="flex items-center gap-4 sm:gap-5 px-4 py-4 sm:px-6 sm:py-5 rounded-2xl bg-white text-[#111827] border-2 border-white shadow-[0_12px_30px_rgba(53,140,148,0.25)] text-left max-w-md w-full">
+              <img
+                src="/images/qr-homepage.png"
+                alt="글로벌정경대학 기호 1번 비상 홈페이지 QR코드"
+                width={112}
+                height={112}
+                className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-lg border border-[#BCE6E9] p-1 bg-white"
+              />
+              <div className="min-w-0 space-y-1">
+                <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#58B4BC] text-white text-[10px] sm:text-[11px] font-extrabold">
+                  QR 코드
+                </span>
+                <p className="text-sm sm:text-base font-black tracking-tight break-keep">
+                  카메라로 스캔하고 바로 접속하세요
+                </p>
+                <p className="text-[11px] sm:text-xs font-semibold text-[#358C94] break-keep">
+                  옆 친구에게 QR을 보여주고 비상 공약을 함께 확인해보세요
+                </p>
+              </div>
+            </div>
+
             {/* Official Poster Bottom Sky-Blue Bar Info */}
             <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 px-5 py-3 rounded-2xl bg-white/95 text-[#111827] border border-white text-xs sm:text-sm font-extrabold shadow-md">
               <span className="tracking-tight text-[#111827]">
