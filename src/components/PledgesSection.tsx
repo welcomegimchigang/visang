@@ -169,7 +169,7 @@ export function PledgesSection() {
                     className="relative group block w-full text-left focus:outline-none overflow-hidden"
                   >
                     <img
-                      src="/images/pledge-poster.jpg"
+                      src="/images/pledge-poster-v3.jpg?v=20261116"
                       alt="2027년도 글로벌정경대학 학생회 총선거 기호 1번 비상 공식 A2 선거 포스터"
                       onError={() => setPosterError(true)}
                       className="w-full h-auto object-contain block opacity-100 group-hover:scale-[1.015] transition-transform duration-300"
@@ -257,7 +257,7 @@ export function PledgesSection() {
               </div>
               <div className="overflow-auto p-2 sm:p-4 flex justify-center bg-[#F2F9FA]">
                 <img
-                  src="/images/pledge-poster.jpg"
+                  src="/images/pledge-poster-v3.jpg?v=20261116"
                   alt="2027년도 글로벌정경대학 학생회 총선거 기호 1번 비상 공식 선거 포스터 확대 이미지"
                   className="max-w-full h-auto object-contain block opacity-100 rounded-lg shadow-md"
                 />
