@@ -116,6 +116,13 @@ export default function RootLayout({
     <html lang="ko" className="scroll-smooth">
       <head>
         <link
+          rel="preload"
+          as="image"
+          href="/campus-map.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
+        <link
           rel="stylesheet"
           as="style"
           crossOrigin="anonymous"

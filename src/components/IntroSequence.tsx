@@ -13,9 +13,8 @@ interface IntroSequenceProps {
 }
 
 const MAP_SOURCES = [
+  "/campus-map.webp",
   "/campus-map.jpg",
-  "/campus-map.png",
-  "/naver_map%20(1).png",
 ];
 
 export default function IntroSequence({ onComplete }: IntroSequenceProps) {
@@ -65,7 +64,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
             {/* Ambient Full-Screen Blurred Satellite Backdrop for Portrait Mobile Viewports */}
             <div
               className="absolute inset-0 bg-cover bg-center scale-125 blur-xl opacity-60 pointer-events-none"
-              style={{ backgroundImage: "url('/campus-map.jpg'), url('/campus-map.png')" }}
+              style={{ backgroundImage: "url('/campus-map.webp')" }}
             />
             <div className="absolute inset-0 bg-slate-900/35 pointer-events-none" />
 
@@ -85,7 +84,7 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
               - On Tablet/Desktop (>=640px): fills viewport with scale-[1.35] origin-[58%_28%].
             */}
             <div
-              style={{ backgroundImage: "url('/campus-map.jpg'), url('/campus-map.png')" }}
+              style={{ backgroundImage: "url('/campus-map.webp')" }}
               className="
                 absolute left-1/2 top-1/2
                 aspect-[1901/931]
@@ -101,6 +100,9 @@ export default function IntroSequence({ onComplete }: IntroSequenceProps) {
               <img
                 src={MAP_SOURCES[mapSrcIndex]}
                 alt="인천대학교 송도캠퍼스 위성 지도"
+                fetchPriority="high"
+                loading="eager"
+                decoding="sync"
                 onError={handleMapError}
                 className="absolute inset-0 z-0 w-full h-full object-fill opacity-100"
               />
